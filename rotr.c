@@ -1,26 +1,27 @@
 #include "monty.h"
-/**
-  *f_rotr- rotates the stack to the bottom
-  *@head: stack head
-  *@counter: line_number
-  *Return: no return
- */
-void f_rotr(stack_t **head, __attribute__((unused)) unsigned int counter)
-{
-	stack_t *copy;
 
-	copy = *head;
-	if (*head == NULL || (*head)->next == NULL)
-	{
+/**
+ * _rotr - function that rotates the stack to the bottom.
+ * @stack: double pointer to the head of stack
+ * @line_number: script line number.
+ *
+ * The last element of the stack becomes the first one.
+ * rotl never fails.
+ *
+ * Return: No return.
+ */
+void _rotr(stack_t **stack, unsigned int line_number)
+{
+	stack_t *temp_variable = *stack;
+
+	(void)(line_number);
+	if (*stack == NULL || (*stack)->next == NULL)
 		return;
-	}
-	while (copy->next)
-	{
-		copy = copy->next;
-	}
-	copy->next = *head;
-	copy->prev->next = NULL;
-	copy->prev = NULL;
-	(*head)->prev = copy;
-	(*head) = copy;
+	while (temp_variable->next != NULL)
+		temp_variable = temp_variable->next;
+	temp_variable->next = *stack;
+	temp_variable->prev->next = NULL;
+	temp_variable->prev = NULL;
+	(*stack)->prev = temp_variable;
+	(*stack) = temp_variable;
 }
